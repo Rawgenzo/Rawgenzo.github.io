@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rawgenzo — Apple Silicon ネイティブの RAW 現像ソフト</title>
+<meta name="description" content="Rawgenzo は Apple Silicon の Mac でネイティブに動く RAW 現像ソフトです。非破壊編集、HDR 風トーン、レンズ補正、3D LUT のルック、構図ガイド。MIT ライセンスのオープンソース。">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rawgenzo — Apple Silicon ネイティブの RAW 現像ソフト">
+<meta property="og:description" content="撮った光を、Mac の速さで現像する。オープンソースの RAW 現像ソフト。">
+<meta property="og:url" content="https://rawgenzo.github.io/">
+<meta property="og:image" content="https://rawgenzo.github.io/assets/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/img/icon.png">
+<link rel="apple-touch-icon" href="assets/img/icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top" aria-label="Rawgenzo トップへ">
+      <img src="assets/img/icon.png" alt="" width="22" height="22">
+      <span>Rawgenzo</span>
+    </a>
+    <nav class="nav-links" aria-label="ページ内">
+      <a href="#looks">ルック</a>
+      <a href="#features">機能</a>
+      <a href="#guides">構図ガイド</a>
+      <a href="#cli">CLI</a>
+      <a href="#specs">仕様</a>
+    </nav>
+    <a class="nav-cta" href="#start">はじめる</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ヒーロー -->
+  <section class="hero" aria-label="Rawgenzo">
+    <div class="hero-media" aria-hidden="true">
+      <img src="assets/img/hero.jpg" alt="" fetchpriority="high">
+    </div>
+    <div class="hero-content">
+      <p class="eyebrow hero-in" style="--d:0">Apple Silicon ネイティブ RAW 現像ソフト</p>
+      <h1 class="hero-title hero-in" style="--d:1">Rawgenzo</h1>
+      <p class="hero-tagline hero-in" style="--d:2">撮った光を、<br class="sp">Mac の速さで現像する。</p>
+      <div class="hero-actions hero-in" style="--d:3">
+        <a class="btn btn-primary" href="#start">はじめる</a>
+        <a class="btn btn-link" href="https://github.com/Rawgenzo/Rawgenzo">GitHub で見る <span aria-hidden="true">›</span></a>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#intro" aria-label="下へスクロール"><span></span></a>
+  </section>
+
+  <!-- 導入(スクロールで文字が明るくなる) -->
+  <section class="intro" id="intro">
+    <p class="reveal-words" data-reveal-words>Rawgenzo は、Apple Silicon のために書かれた RAW 現像ソフトです。macOS の Core Image で RAW を読み、Metal で補正する。余計なものを挟まず、写真と向き合う時間だけを残しました。</p>
+  </section>
+
+  <!-- 数字 -->
+  <section class="stats" aria-label="概要">
+    <div class="stat fade-up">
+      <p class="stat-num">Native</p>
+      <p class="stat-label">Apple Silicon で<br>ネイティブに動作</p>
+    </div>
+    <div class="stat fade-up">
+      <p class="stat-num"><span data-count="21">21</span></p>
+      <p class="stat-label">すぐに使える<br>LUT を同梱</p>
+    </div>
+    <div class="stat fade-up">
+      <p class="stat-num"><span data-count="7">7</span></p>
+      <p class="stat-label">種類の<br>構図ガイド</p>
+    </div>
+    <div class="stat fade-up">
+      <p class="stat-num">16<small>bit</small></p>
+      <p class="stat-label">TIFF と<br>HDR HEIF で書き出し</p>
+    </div>
+  </section>
+
+  <!-- ルック(LUT 比較スライダー) -->
+  <section class="section looks" id="looks">
+    <div class="section-head fade-up">
+      <p class="eyebrow">ルック</p>
+      <h2 class="headline">なぞるだけで、<br class="sp">空気が変わる。</h2>
+      <p class="lead">フィルム風・シネマ風・モノクロ・ノスタルジックの 4 つの組み込みルックに加え、<code>.cube</code> 形式の 3D LUT をフォルダに置くだけで、自分のルックを増やせます。効き具合は「強さ」で 0〜100% まで。すぐに試せる 21 個の LUT も付属しています。</p>
+    </div>
+
+    <div class="compare-wrap fade-up">
+      <div class="chips" role="tablist" aria-label="LUT の例">
+        <button class="chip is-active" role="tab" aria-selected="true" data-lut="beach" data-name="01 Teal &amp; Orange Cinematic">Teal &amp; Orange</button>
+        <button class="chip" role="tab" aria-selected="false" data-lut="leaf" data-name="S03 Autumn Momiji">紅葉</button>
+        <button class="chip" role="tab" aria-selected="false" data-lut="lantern" data-name="C04 Neon Night">Neon Night</button>
+        <button class="chip" role="tab" aria-selected="false" data-lut="sakura" data-name="S01 Sakura Bloom">桜</button>
+        <button class="chip" role="tab" aria-selected="false" data-lut="falls" data-name="06 Mono High Contrast">Mono</button>
+      </div>
+
+      <div class="compare" id="compare" style="--pos:50%">
+        <img class="compare-img compare-after" src="assets/img/lut-beach-after.jpg" alt="LUT を適用した写真" draggable="false">
+        <div class="compare-before">
+          <img class="compare-img" src="assets/img/lut-beach-before.jpg" alt="LUT を適用する前の写真" draggable="false">
+        </div>
+        <span class="compare-tag compare-tag-before">Original</span>
+        <span class="compare-tag compare-tag-after" id="compareName">01 Teal &amp; Orange Cinematic</span>
+        <div class="compare-handle" aria-hidden="true"><span class="compare-knob"></span></div>
+        <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1"
+               aria-label="比較の位置(左: 元の写真 / 右: LUT 適用後)">
+      </div>
+      <p class="note">付属の LUT を、Rawgenzo のルックと同じ方法(sRGB ガンマで 3D LUT を適用)で写真に掛けた例です。元の写真は撮影時の JPEG で、Rawgenzo で現像したものではありません。</p>
+    </div>
+  </section>
+
+  <!-- 機能(ベントーグリッド) -->
+  <section class="section features" id="features">
+    <div class="section-head fade-up">
+      <p class="eyebrow">機能</p>
+      <h2 class="headline">現像に要るものを、<br class="sp">要るだけ。</h2>
+    </div>
+
+    <div class="bento">
+
+      <!-- HDR トーン -->
+      <article class="card card-wide card-photo fade-up">
+        <img class="card-bg" src="assets/img/sunset.jpg" alt="" loading="lazy">
+        <div class="card-body">
+          <p class="card-kicker">HDR トーン</p>
+          <h3>白く飛ばさない。<br>黒く潰さない。</h3>
+          <p>ハイライトの回復とシャドウの持ち上げを、明るさの局所的なマスクで。コントラストは色相を崩さない自前のトーンカーブで ±120 まで。</p>
+        </div>
+      </article>
+
+      <!-- 非破壊 -->
+      <article class="card card-code fade-up">
+        <div class="card-body">
+          <p class="card-kicker">非破壊編集</p>
+          <h3>RAW には、<br>指一本触れない。</h3>
+          <p>調整は RAW の隣の小さな JSON に自動で保存。いつでも最初からやり直せます。</p>
+        </div>
+<pre class="code-snippet" aria-label="サイドカーの例"><span class="c-dim">DSC03356.ARW.rawgenzo.json</span>
+{
+  <span class="c-key">"cameraProfileID"</span> : <span class="c-str">"sony.ilce-7sm3"</span>,
+  <span class="c-key">"settings"</span> : {
+    <span class="c-key">"exposure"</span> : <span class="c-num">0.5</span>,
+    <span class="c-key">"contrast"</span> : <span class="c-num">0.3</span>,
+    <span class="c-key">"look"</span> : {
+      <span class="c-key">"id"</span> : <span class="c-str">"builtin.film"</span>,
+      <span class="c-key">"strength"</span> : <span class="c-num">0.7</span>
+    }
+  }
+}</pre>
+      </article>
+
+      <!-- ディテール(ルーペ) -->
+      <article class="card card-loupe fade-up">
+        <div class="card-body">
+          <p class="card-kicker">表示とディテール</p>
+          <h3>等倍は、<br>物理ピクセルで。</h3>
+          <p>写真の 1 ピクセルを画面の 1 物理ピクセルに。ピンチやダブルクリックで拡大し、シャープネスとノイズ除去を細部で確かめられます。</p>
+        </div>
+        <div class="loupe" id="loupe">
+          <img src="assets/img/hydrangea.jpg" alt="紫陽花の写真。カーソルを乗せると拡大して見られる" loading="lazy" draggable="false">
+          <div class="loupe-lens" aria-hidden="true"></div>
+          <span class="loupe-hint">カーソルを乗せて拡大</span>
+        </div>
+      </article>
+
+      <!-- クロップと傾き -->
+      <article class="card card-tilt fade-up">
+        <div class="card-body">
+          <p class="card-kicker">クロップと傾き補正</p>
+          <h3>傾けても、<br>枠ははみ出さない。</h3>
+          <p>±15° の傾き補正。枠は常に回転後の画像の内側に収まり、四隅に何も無い部分が写り込みません。</p>
+        </div>
+        <div class="tilt-demo" aria-hidden="true">
+          <div class="tilt-photo"><img src="assets/img/beach-wide.jpg" alt="" loading="lazy"></div>
+          <div class="tilt-frame"><i></i><i></i><i></i><i></i></div>
+          <span class="tilt-angle">0.0°</span>
+        </div>
+      </article>
+
+      <!-- レンズ補正 -->
+      <article class="card card-photo fade-up">
+        <img class="card-bg" src="assets/img/beach-wide.jpg" alt="" loading="lazy">
+        <div class="card-body">
+          <p class="card-kicker">レンズ補正</p>
+          <h3>レンズの癖は、<br>カメラが覚えている。</h3>
+          <p>ARW に記録された補正値から、周辺減光・歪曲・倍率色収差を補正。初めは撮影時のカメラの設定に従い、写真ごとに切り替えられます。</p>
+          <ul class="pill-list">
+            <li>周辺減光</li><li>歪曲</li><li>倍率色収差</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- 書き出し -->
+      <article class="card card-export card-wide fade-up">
+        <div class="card-body">
+          <p class="card-kicker">書き出し</p>
+          <h3>書き出しは、<br>名前まで決めておく。</h3>
+          <p>JPEG・HEIF・16bit TIFF・HDR HEIF。色空間は sRGB / Display P3 / Adobe RGB。ファイル名は撮影日や連番、レンズ名を組み合わせたテンプレートで。</p>
+          <ul class="pill-list">
+            <li>JPEG</li><li>HEIF</li><li>16bit TIFF</li><li>HDR HEIF</li>
+          </ul>
+        </div>
+        <div class="template-demo" aria-label="ファイル名テンプレートの例">
+          <div class="template-row">
+            <span class="template-label">テンプレート</span>
+            <code id="tplIn">{date}_{seq:3}</code>
+          </div>
+          <div class="template-arrow" aria-hidden="true">↓</div>
+          <div class="template-row">
+            <span class="template-label">ファイル名</span>
+            <code id="tplOut" class="tpl-out">20260621_001.jpg</code>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 構図ガイド -->
+  <section class="section guides" id="guides">
+    <div class="section-head fade-up">
+      <p class="eyebrow">構図ガイド</p>
+      <h2 class="headline">構図の答え合わせを、<br class="sp">プレビューの上で。</h2>
+      <p class="lead">三分割から黄金螺旋まで 7 種類。重ねて表示でき、色で見分けられます。クロップ中は枠の中に描かれるので、切り抜きながら構図を詰められます。</p>
+    </div>
+
+    <div class="guide-stage fade-up">
+      <div class="guide-photo">
+        <img src="assets/img/staircase.jpg" alt="螺旋階段を見下ろした写真" loading="lazy">
+        <svg id="guideSvg" viewBox="0 0 1500 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+      <div class="guide-controls" role="group" aria-label="表示するガイド">
+        <button class="gchip" data-guide="halves" style="--c:#ebebeb">二分割線</button>
+        <button class="gchip" data-guide="thirds" style="--c:#ffffff">三分割線</button>
+        <button class="gchip" data-guide="golden" style="--c:#ffcc4d">黄金比</button>
+        <button class="gchip" data-guide="silver" style="--c:#9ed6ff">白銀比</button>
+        <button class="gchip" data-guide="diagonal" style="--c:#d9a6ff">対角線</button>
+        <button class="gchip" data-guide="triangle" style="--c:#a6f07a">黄金三角形</button>
+        <button class="gchip is-on" data-guide="spiral" style="--c:#ff8c61">黄金螺旋</button>
+        <button class="gchip gchip-action" id="spiralRotate" title="アプリでは ⇧⌥⌘G">螺旋を回す ↻</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLI -->
+  <section class="section cli" id="cli">
+    <div class="cli-grid">
+      <div class="section-head section-head-left fade-up">
+        <p class="eyebrow">コマンドライン</p>
+        <h2 class="headline">フォルダごと、<br>ターミナルから。</h2>
+        <p class="lead">アプリと同じ現像エンジンを使う <code>rawdev</code> を同梱。フォルダを渡せば中の RAW をまとめて現像します。出力先や形式はアプリの書き出し設定と共有。</p>
+      </div>
+      <div class="terminal fade-up" aria-label="rawdev の実行例">
+        <div class="terminal-bar"><i></i><i></i><i></i><span>rawdev</span></div>
+<pre class="terminal-body" id="terminal"><span class="t-line"><span class="t-prompt">$</span> rawdev check</span>
+<span class="t-out">Core Imageの対応カメラ数: 932
+対応: Sony Alpha ILCE-7S III</span>
+
+<span class="t-line"><span class="t-prompt">$</span> rawdev name "{date}_{model}_{seq:3}" ~/Pictures/ARW</span>
+<span class="t-out">DSC03356.ARW → 20260621_ILCE-7SM3_001
+DSC03402.ARW → 20260621_ILCE-7SM3_002
+DSC03451.ARW → 20260622_ILCE-7SM3_003</span>
+
+<span class="t-line"><span class="t-prompt">$</span> rawdev develop ~/Pictures/ARW --hdr 0.6 --look builtin.film</span>
+<span class="t-line t-cursor"><span class="t-prompt">$</span> </span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ギャラリー -->
+  <section class="gallery" aria-label="写真">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <img src="assets/img/gallery-1.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-2.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-3.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-4.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-5.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-6.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-7.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-8.jpg" alt="" loading="lazy">
+        <img src="assets/img/gallery-9.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+    <p class="gallery-credit">Photographs by Yukimitsu IZAWA</p>
+  </section>
+
+  <!-- 仕様 -->
+  <section class="section specs" id="specs">
+    <div class="section-head fade-up">
+      <p class="eyebrow">仕様</p>
+      <h2 class="headline">技術仕様</h2>
+    </div>
+    <dl class="spec-list fade-up">
+      <div><dt>対応カメラ</dt><dd>SONY α7S III (ILCE-7SM3) の ARW<br><span class="dim">機種は後から追加できる設計です</span></dd></div>
+      <div><dt>動作環境</dt><dd>Apple Silicon 搭載の Mac<br>macOS 13 以降</dd></div>
+      <div><dt>ビルド</dt><dd>Xcode 27 以降 (Swift 6.4)<br><span class="dim">外部の依存パッケージなし</span></dd></div>
+      <div><dt>調整</dt><dd>露出・ホワイトバランス・コントラスト・HDR 風トーン・彩度・自然な彩度・シャープネス・輝度/色ノイズ除去・レンズ補正・クロップ・傾き補正・ルック</dd></div>
+      <div><dt>書き出し</dt><dd>JPEG / HEIF / 16bit TIFF / HDR HEIF<br>sRGB / Display P3 / Adobe RGB</dd></div>
+      <div><dt>ルック</dt><dd>組み込み 4 種 + <code>.cube</code> 3D LUT<br><span class="dim">付属 LUT 21 個</span></dd></div>
+      <div><dt>保存</dt><dd>非破壊(写真ごとのサイドカー JSON)<br>設定は <code>~/.Rawgenzo/</code></dd></div>
+      <div><dt>ライセンス</dt><dd>MIT License(オープンソース)</dd></div>
+    </dl>
+  </section>
+
+  <!-- はじめる -->
+  <section class="section start" id="start">
+    <div class="section-head fade-up">
+      <p class="eyebrow">はじめる</p>
+      <h2 class="headline">ソースから、<br class="sp">3 行で。</h2>
+      <p class="lead">ビルド済みのアプリは配布していません。Xcode の入った Mac で、次のコマンドを実行してください。<code>Rawgenzo.app</code> がビルドされ、<code>/Applications</code> に入ります。</p>
+    </div>
+    <div class="install fade-up">
+      <pre id="installCode"><code>git clone https://github.com/Rawgenzo/Rawgenzo.git
+cd Rawgenzo
+./scripts/make-app.sh --install</code></pre>
+      <button class="copy-btn" id="copyBtn" type="button">コピー</button>
+    </div>
+    <div class="start-links fade-up">
+      <a class="btn btn-primary" href="https://github.com/Rawgenzo/Rawgenzo">GitHub リポジトリ</a>
+      <a class="btn btn-link" href="https://github.com/Rawgenzo/Rawgenzo#readme">詳しい使い方(README) <span aria-hidden="true">›</span></a>
+    </div>
+    <p class="note center">開発中のソフトウェアです。現在の制約は README の「現状について」をご覧ください。</p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/img/icon.png" alt="" width="28" height="28">
+      <span>Rawgenzo</span>
+    </div>
+    <p>© 2026 Yukimitsu IZAWA · <a href="https://github.com/Rawgenzo/Rawgenzo/blob/main/LICENSE">MIT License</a> · <a href="https://github.com/Rawgenzo/Rawgenzo">GitHub</a></p>
+    <p class="dim">Apple、Mac、macOS、Apple Silicon、Metal は Apple Inc. の商標です。SONY、α は ソニーグループ株式会社の商標です。</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
