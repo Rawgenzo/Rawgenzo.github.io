@@ -118,6 +118,10 @@ code { font-family: var(--mono); font-size: 0.88em; background: rgba(255,255,255
   margin: 0; font-size: clamp(64px, 14vw, 168px); line-height: 1; font-weight: 700; letter-spacing: -0.045em;
   background: linear-gradient(180deg, #ffffff 0%, #f4ffd6 55%, #c9f26b 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  /* グラデーションは要素の箱の中だけに描かれる。g の下と、字間を詰めた最後の o の右が箱からはみ出して
+     削れるので、内側に余白を足して描画範囲を広げ、同じだけ外側の余白で戻して位置は変えない */
+  padding: 0.04em 0.08em 0.18em;
+  margin: -0.04em -0.08em -0.18em;
 }
 .hero-tagline { margin: 20px 0 0; font-size: clamp(22px, 3.2vw, 34px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; }
 .hero-actions { margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
