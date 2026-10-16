@@ -179,6 +179,172 @@
     set(50);
   })();
 
+  // ---------- AI に任せる(再現デモ) ----------
+  // 実際の試験の流れを短くしたもの: 明るさを揃える(solve_exposure)→ この写真をモノクロに(get_app_state, adjust)→ 取り消す(undo)
+  (function aiDemo() {
+    const box = $("#aiDemo");
+    if (!box) return;
+    const log = $("#aiLog");
+    const photo = $("#aiPhoto");
+    const notice = $("#aiNotice");
+    const thumbs = $$("#aiStrip img");
+    const sliders = Object.fromEntries($$(".ai-slider", box).map((el) => [el.dataset.param, el]));
+    const ranges = { exposure: [-3, 3], saturation: [0, 2], highlights: [0, 1] };
+    const fmt = {
+      exposure: (v) => (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(2) + " EV",
+      saturation: (v) => v.toFixed(2),
+      highlights: (v) => v.toFixed(2),
+    };
+    // 写真ごとの明るさ(揃える前はばらばら。5 枚目は暗すぎて届かない)と、開いている写真の彩度
+    const before = [0.62, 1.32, 0.85, 1.45, 0.42, 1.12];
+    const after = [1, 1, 1, 1, 0.72, 1];
+    const state = { bright: before.slice(), sat: 1, values: { exposure: 0, saturation: 1, highlights: 0 } };
+
+    let visible = false;
+    let waiters = [];   // 見えるのを待っている処理(本筋と道具の表示が同時に待つことがあるので複数)
+    new IntersectionObserver((es) => {
+      visible = es[0].isIntersecting;
+      if (visible) { waiters.forEach((w) => w()); waiters = []; }
+    }, { threshold: 0.35 }).observe(box);
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    // 見えていないときは待つ(画面外で動かし続けない)
+    const pause = async (ms) => {
+      await sleep(ms);
+      while (!visible) await new Promise((r) => waiters.push(r));
+    };
+
+    const paint = () => {
+      thumbs.forEach((t, i) => (t.style.filter = `brightness(${state.bright[i]})` + (i === 0 ? ` saturate(${state.sat})` : "")));
+      photo.style.filter = `brightness(${state.bright[0]}) saturate(${state.sat})`;
+    };
+    const setSlider = (key, v) => {
+      const el = sliders[key];
+      const [lo, hi] = ranges[key];
+      state.values[key] = v;
+      el.style.setProperty("--v", ((v - lo) / (hi - lo)) * 100 + "%");
+      el.querySelector(".ai-sl-value").textContent = fmt[key](v);
+    };
+    const animateSlider = async (key, to, ms = 900) => {
+      const el = sliders[key];
+      el.classList.add("lit");
+      const from = state.values[key], t0 = performance.now();
+      await new Promise((done) => {
+        const step = (t) => {
+          const k = clamp((t - t0) / ms, 0, 1), e = 1 - Math.pow(1 - k, 3);
+          setSlider(key, from + (to - from) * e);
+          k < 1 ? requestAnimationFrame(step) : done();
+        };
+        requestAnimationFrame(step);
+      });
+      // アプリと同じく、AI が変えたスライダーはしばらく光らせる
+      setTimeout(() => el.classList.remove("lit"), 2600);
+    };
+    const add = (cls, html) => {
+      const p = document.createElement("p");
+      p.className = "ai-msg " + cls;
+      p.innerHTML = html;
+      log.appendChild(p);
+      return p;
+    };
+    const typing = async (ms) => {
+      const t = document.createElement("div");
+      t.className = "ai-typing";
+      t.innerHTML = "<span></span><span></span><span></span>";
+      log.appendChild(t);
+      await pause(ms);
+      t.remove();
+    };
+    const tool = async (name, detail, ms) => {
+      const el = add("tool", `<b>${name}</b> ${detail}`);
+      await pause(ms);
+      el.classList.add("done");
+    };
+    const say = (text) => add("bot", text);
+    const showNotice = (text) => {
+      notice.textContent = text;
+      notice.classList.add("on");
+      setTimeout(() => notice.classList.remove("on"), 4200);
+    };
+    const reset = () => {
+      log.innerHTML = "";
+      log.classList.remove("is-clearing");
+      state.bright = before.slice();
+      state.sat = 1;
+      setSlider("exposure", 0);
+      setSlider("saturation", 1);
+      setSlider("highlights", 0);
+      paint();
+    };
+
+    if (reduceMotion) {
+      // 動かさずに、最初の場面の終わりを見せる
+      state.bright = after.slice();
+      paint();
+      setSlider("exposure", 0.62);
+      add("user", "全部の写真の明るさを揃えて");
+      add("tool done", "<b>solve_exposure</b> 6 枚 · 平均輝度 0.45");
+      say("6 枚を揃えました。1 枚だけは露出を上限まで上げても届きません。シャドウ持ち上げも使いますか?");
+      return;
+    }
+
+    async function run() {
+      for (;;) {
+        reset();
+        await pause(900);
+
+        // 明るさを揃える
+        add("user", "全部の写真の明るさを揃えて");
+        await typing(900);
+        const working = tool("solve_exposure", "6 枚 · 平均輝度 0.45", 2100);
+        thumbs.forEach((t) => t.classList.add("working"));
+        for (let i = 0; i < thumbs.length; i++) {
+          await pause(220);
+          state.bright[i] = after[i];
+          paint();
+        }
+        animateSlider("exposure", 0.62);
+        showNotice("AI が「明るさを揃える」この写真を変更しました");
+        await working;
+        thumbs.forEach((t) => t.classList.remove("working"));
+        await typing(700);
+        say("6 枚を揃えました。1 枚だけは露出を上限まで上げても届きません。シャドウ持ち上げも使いますか?");
+        await pause(3200);
+
+        // この写真をモノクロに
+        add("user", "この写真をモノクロにして");
+        await typing(700);
+        await tool("get_app_state", "開いている写真を確認", 700);
+        const adj = tool("adjust", "彩度 1.00 → 0", 1200);
+        await pause(250);
+        animateSlider("saturation", 0, 1200);
+        state.sat = 0;
+        paint();
+        showNotice("AI が「モノクロにする」この写真を変更しました");
+        await adj;
+        say("モノクロにしました。");
+        await pause(2800);
+
+        // 取り消す
+        add("user", "やっぱり戻して");
+        await typing(600);
+        const undo = tool("undo", "作業「モノクロにする」", 900);
+        await pause(200);
+        animateSlider("saturation", 1, 1200);
+        state.sat = 1;
+        paint();
+        showNotice("AI が「モノクロにする」の変更を取り消しました");
+        await undo;
+        say("取り消しました。カラーに戻っています。");
+        await pause(4200);
+
+        log.classList.add("is-clearing");
+        await pause(700);
+      }
+    }
+    reset();
+    box.addEventListener("enter", () => run(), { once: true });
+  })();
+
   // ---------- ルーペ ----------
   (function loupe() {
     const box = $("#loupe");
