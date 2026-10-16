@@ -311,6 +311,18 @@ code { font-family: var(--mono); font-size: 0.88em; background: rgba(255,255,255
 .ai-arrow { display: inline-block; margin: 0 0.18em; font-size: 0.55em; vertical-align: 0.22em; -webkit-text-fill-color: var(--text-3); color: var(--text-3); }
 .ai-metric-label { margin: 14px 0 0; color: var(--text-2); font-size: 15px; line-height: 1.6; max-width: 420px; }
 
+.ai-asks { max-width: var(--max); margin: clamp(56px, 8vw, 96px) auto 0; }
+.ai-asks-title { margin: 0 0 20px; text-align: center; font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.03em; }
+.ai-asks-grid {
+  margin: 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px;
+}
+.ai-asks-grid li { border-top: 1px solid var(--line); padding-top: 16px; min-width: 0; }
+.ai-ask-kind { margin: 0 0 10px; font-size: 12px; font-weight: 600; color: var(--text-3); letter-spacing: 0.04em; }
+/* 全角の「 は左に空きがあるので、1 行目だけ半角分左へ出して行頭をそろえる(折り返した行は見出しにそろう) */
+.ai-ask { margin: 0 0 6px; text-indent: -0.5em; font-size: 16px; line-height: 1.5; color: var(--text); letter-spacing: -0.01em; }
+.ai-asks-note { margin: 22px 0 0; text-align: center; color: var(--text-2); font-size: 15px; }
+
 .ai-points {
   max-width: var(--max); margin: clamp(56px, 8vw, 96px) auto 0;
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;
@@ -336,6 +348,7 @@ code { font-family: var(--mono); font-size: 0.88em; background: rgba(255,255,255
 
 @media (max-width: 1000px) {
   .ai-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-asks-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 24px; }
 }
 @media (max-width: 860px) {
   .ai-panes { grid-template-columns: 1fr; min-height: 0; }
@@ -351,6 +364,7 @@ code { font-family: var(--mono); font-size: 0.88em; background: rgba(255,255,255
 }
 @media (max-width: 640px) {
   .ai-metrics, .ai-points { grid-template-columns: 1fr; }
+  .ai-asks-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ai-side { grid-template-columns: 1fr; }
   .ai-window { border-radius: 16px; }
   .ai-bar span { translate: none; }
