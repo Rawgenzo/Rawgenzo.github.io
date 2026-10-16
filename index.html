@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rawgenzo — Apple Silicon ネイティブの RAW 現像ソフト</title>
-<meta name="description" content="Rawgenzo は Apple Silicon の Mac でネイティブに動く RAW 現像ソフトです。非破壊編集、HDR 風トーン、レンズ補正、3D LUT のルック、構図ガイド。MIT ライセンスのオープンソース。">
+<meta name="description" content="Rawgenzo は Apple Silicon の Mac でネイティブに動く RAW 現像ソフトです。AI に話しかけて現像を任せられます(MCP)。非破壊編集、HDR 風トーン、レンズ補正、3D LUT のルック、構図ガイド。MIT ライセンスのオープンソース。">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rawgenzo — Apple Silicon ネイティブの RAW 現像ソフト">
@@ -25,6 +25,7 @@
       <span>Rawgenzo</span>
     </a>
     <nav class="nav-links" aria-label="ページ内">
+      <a href="#ai">AI</a>
       <a href="#looks">ルック</a>
       <a href="#features">機能</a>
       <a href="#guides">構図ガイド</a>
@@ -43,6 +44,7 @@
       <img src="assets/img/hero.jpg" alt="" fetchpriority="high">
     </div>
     <div class="hero-content">
+      <a class="hero-badge hero-in" style="--d:0" href="#ai"><span class="badge-new">New</span>AI に現像を任せる<span class="badge-arrow" aria-hidden="true">›</span></a>
       <p class="eyebrow hero-in" style="--d:0">Apple Silicon ネイティブ RAW 現像ソフト</p>
       <h1 class="hero-title hero-in" style="--d:1">Rawgenzo</h1>
       <p class="hero-tagline hero-in" style="--d:2">撮った光を、<br class="sp">Mac の速さで現像する。</p>
@@ -77,6 +79,105 @@
       <p class="stat-num">16<small>bit</small></p>
       <p class="stat-label">TIFF と<br>HDR HEIF で書き出し</p>
     </div>
+  </section>
+
+  <!-- AI に任せる -->
+  <section class="section ai" id="ai">
+    <div class="section-head fade-up">
+      <p class="eyebrow">AI に任せる <span class="new-tag">New</span></p>
+      <h2 class="headline"><span class="ai-headline">言葉で、<br class="sp">現像する。</span></h2>
+      <p class="lead">「全部の写真の明るさを揃えて」「この写真をモノクロに」。<span class="nowrap">Claude Code</span> などの AI に話しかけるだけで、Rawgenzo が<span class="nowrap">現像設定を</span>変えます。変わっていく様子は、アプリの画面でその場に。</p>
+    </div>
+
+    <div class="ai-demo fade-up" id="aiDemo">
+      <div class="ai-window" aria-hidden="true">
+        <div class="ai-bar"><i></i><i></i><i></i><span>AI × Rawgenzo</span></div>
+        <div class="ai-panes">
+          <div class="ai-chat">
+            <p class="ai-chat-title">AI との会話</p>
+            <div class="ai-log" id="aiLog"></div>
+          </div>
+          <div class="ai-app">
+            <div class="ai-photo">
+              <img id="aiPhoto" src="assets/img/hydrangea.jpg" alt="" loading="lazy" draggable="false">
+              <span class="ai-notice" id="aiNotice"></span>
+            </div>
+            <div class="ai-side">
+              <p class="ai-side-title">調整</p>
+              <div class="ai-slider" data-param="exposure"><span class="ai-sl-label">露出</span><span class="ai-sl-value">+0.00 EV</span><span class="ai-sl-track"><i></i></span></div>
+              <div class="ai-slider" data-param="saturation"><span class="ai-sl-label">彩度</span><span class="ai-sl-value">1.00</span><span class="ai-sl-track"><i></i></span></div>
+              <div class="ai-slider" data-param="highlights"><span class="ai-sl-label">ハイライト回復</span><span class="ai-sl-value">0.00</span><span class="ai-sl-track"><i></i></span></div>
+            </div>
+            <div class="ai-strip" id="aiStrip">
+              <img src="assets/img/hydrangea.jpg" alt="" loading="lazy" class="current">
+              <img src="assets/img/gallery-2.jpg" alt="" loading="lazy">
+              <img src="assets/img/gallery-3.jpg" alt="" loading="lazy">
+              <img src="assets/img/gallery-5.jpg" alt="" loading="lazy">
+              <img src="assets/img/gallery-6.jpg" alt="" loading="lazy">
+              <img src="assets/img/gallery-4.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only">再現デモ: AI に「全部の写真の明るさを揃えて」と頼むと、6 枚の明るさが揃い、届かない 1 枚について AI が判断を求めます。「この写真をモノクロにして」と頼むと、開いている写真と彩度のスライダーがその場で変わり、「やっぱり戻して」で元に戻ります。</p>
+      <p class="note center">画面は実際の動作を再現したものです。AI とのやり取りは、Claude Code などの MCP クライアントで行います。</p>
+    </div>
+
+    <div class="ai-metrics fade-up">
+      <div class="ai-metric">
+        <p class="ai-metric-num">44<span class="ai-arrow" aria-label="から">→</span>9</p>
+        <p class="ai-metric-label">同じ 5 つの指示に、AI が使った道具の呼び出しの回数。試験を重ねて仕組みを直した、実際の記録です。</p>
+      </div>
+      <div class="ai-metric">
+        <p class="ai-metric-num">21<span class="ai-arrow" aria-label="から">→</span>1</p>
+        <p class="ai-metric-label">「6 枚の明るさを揃えて」にかかった呼び出し。目標を受け取った Rawgenzo が、写真ごとの露出を自分で探します。</p>
+      </div>
+    </div>
+
+    <div class="ai-points">
+      <article class="ai-point fade-up">
+        <p class="ai-point-kicker">目標で頼む</p>
+        <h3>言うのは、<br>ゴールだけ。</h3>
+        <p>「平均輝度 0.45」「白飛びは 1% まで」。合う露出とハイライト回復は Rawgenzo が探します。AI にスライダーを往復させません。</p>
+      </article>
+      <article class="ai-point fade-up">
+        <p class="ai-point-kicker">その場で見える</p>
+        <h3>AI の手つきが、<br>画面に出る。</h3>
+        <p>開いている写真はすぐに描き直され、AI が動かしたスライダーが光ります。「この写真」と言えば、今見ている写真のことだと伝わります。</p>
+      </article>
+      <article class="ai-point fade-up">
+        <p class="ai-point-kicker">取り消し</p>
+        <h3>人の手は、<br>消さない。</h3>
+        <p>取り消しは頼んだ作業ごと。あなたが後から触った写真は、AI が取り消そうとしても取り消しません。RAW は書き換えません。</p>
+      </article>
+      <article class="ai-point fade-up">
+        <p class="ai-point-kicker">鍵を持たない</p>
+        <h3>つなぐのは、<br>あなたの AI。</h3>
+        <p>Rawgenzo は AI の API キーを持たず、外からの接続も受けません。AI と話すのは手元の MCP クライアント。AI に渡るのは数値と、必要なときの縮小画像だけです。</p>
+      </article>
+    </div>
+
+    <div class="ai-start fade-up">
+      <div class="ai-steps">
+        <p class="ai-steps-title">使いはじめる</p>
+        <ol>
+          <li>MCP クライアント(Claude Code など)に <code>rawdev mcp</code> を登録する</li>
+          <li>Rawgenzo の設定で「AI からの操作を受け付ける」をオンにする(画面にその場で出したいとき)</li>
+          <li>写真のフォルダについて、AI に話しかける</li>
+        </ol>
+        <p class="ai-links"><a href="https://github.com/Rawgenzo/Rawgenzo#ai-に現像を任せるmcp-サーバー試作">設定のしかた(README)</a><span aria-hidden="true">·</span><a href="https://github.com/Rawgenzo/Rawgenzo/blob/main/docs/ai-mcp-architecture.md">仕組みの図解</a></p>
+      </div>
+<pre class="ai-config" aria-label="Claude Code の .mcp.json の例"><span class="c-dim">.mcp.json</span>
+{
+  <span class="c-key">"mcpServers"</span>: {
+    <span class="c-key">"rawgenzo"</span>: {
+      <span class="c-key">"command"</span>: <span class="c-str">"/path/to/rawdev"</span>,
+      <span class="c-key">"args"</span>: [<span class="c-str">"mcp"</span>, <span class="c-str">"/path/to/photos"</span>]
+    }
+  }
+}</pre>
+    </div>
+    <p class="note center">試作の機能です。クロップ・ルックの選択・書き出しは、まだ AI からはできません。</p>
   </section>
 
   <!-- ルック(LUT 比較スライダー) -->
@@ -301,6 +402,7 @@ DSC03451.ARW → 20260622_ILCE-7SM3_003</span>
       <div><dt>書き出し</dt><dd>JPEG / HEIF / 16bit TIFF / HDR HEIF<br>sRGB / Display P3 / Adobe RGB</dd></div>
       <div><dt>ルック</dt><dd>組み込み 4 種 + <code>.cube</code> 3D LUT<br><span class="dim">付属 LUT 21 個</span></dd></div>
       <div><dt>保存</dt><dd>非破壊(写真ごとのサイドカー JSON)<br>設定は <code>~/.Rawgenzo/</code></dd></div>
+      <div><dt>AI 操作</dt><dd>MCP サーバー <code>rawdev mcp</code>。Claude Code などの MCP クライアントから操作<br><span class="dim">試作。アプリで開いている写真への反映は、設定でオン</span></dd></div>
       <div><dt>ライセンス</dt><dd>MIT License(オープンソース)</dd></div>
     </dl>
   </section>
