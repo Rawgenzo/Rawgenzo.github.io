@@ -137,7 +137,7 @@
     <div class="ai-asks fade-up">
       <p class="ai-asks-title">こんなふうに頼めます</p>
       <ul class="ai-asks-grid">
-        <li><p class="ai-ask-kind">明るさ・色</p><p class="ai-ask">「全部の写真の<span class="nowrap">明るさを揃えて」</span></p><p class="ai-ask">「白飛びを抑えて」</p></li>
+        <li><p class="ai-ask-kind">明るさ・色</p><p class="ai-ask">「全部の写真の<span class="nowrap">明るさを揃えて」</span></p><p class="ai-ask">「桜の花びらだけ、<span class="nowrap">もう少しピンクに」</span></p></li>
         <li><p class="ai-ask-kind">切り抜き</p><p class="ai-ask">「人物が主役に<span class="nowrap">なるように</span><span class="nowrap">切り抜いて」</span></p><p class="ai-ask">「2 度傾けて」</p></li>
         <li><p class="ai-ask-kind">雰囲気</p><p class="ai-ask">「シネマ調にして」</p><p class="ai-ask">「フィルム風を<span class="nowrap">少し弱めに」</span></p></li>
         <li><p class="ai-ask-kind">レンズ・出力</p><p class="ai-ask">「歪曲補正をオンに」</p><p class="ai-ask">「HDR 出力をオンに」</p></li>
@@ -305,6 +305,22 @@
         </div>
       </article>
 
+      <!-- 色別補正 -->
+      <article class="card card-color card-wide fade-up">
+        <div class="card-body">
+          <p class="card-kicker">色別補正</p>
+          <h3>桜の花びらだけを、<br>桜色に。</h3>
+          <p>8 色の帯ごとに色相・彩度・輝度を整えるほか、スポイトで拾った色だけを狙えます。白に近い淡い花びらにも色を足せて、空や枝はそのまま。AI に頼めば、効く範囲と強さは Rawgenzo が決めます。</p>
+          <ul class="pill-list">
+            <li>8 色</li><li>拾った色</li><li>効く場所を表示</li>
+          </ul>
+        </div>
+        <div class="color-pair">
+          <figure><img src="assets/img/color-before.jpg" alt="補正前の桜。花びらはほとんど白" loading="lazy"><figcaption>補正前</figcaption></figure>
+          <figure><img src="assets/img/color-after.jpg" alt="色別補正の後。花びらだけが淡いピンクになり、空や枝は変わらない" loading="lazy"><figcaption>補正後</figcaption></figure>
+        </div>
+      </article>
+
       <!-- 書き出し -->
       <article class="card card-export card-wide fade-up">
         <div class="card-body">
@@ -410,11 +426,11 @@ DSC03451.ARW → 20260622_ILCE-7SM3_003</span>
       <div><dt>対応カメラ</dt><dd>SONY α7S III (ILCE-7SM3) の ARW<br><span class="dim">機種は後から追加できる設計です</span></dd></div>
       <div><dt>動作環境</dt><dd>Apple Silicon 搭載の Mac<br>macOS 13 以降</dd></div>
       <div><dt>ビルド</dt><dd>Xcode 27 以降 (Swift 6.4)<br><span class="dim">外部の依存パッケージなし</span></dd></div>
-      <div><dt>調整</dt><dd>露出・ホワイトバランス・コントラスト・HDR 風トーン・彩度・自然な彩度・シャープネス・輝度/色ノイズ除去・レンズ補正・クロップ・傾き補正・ルック</dd></div>
+      <div><dt>調整</dt><dd>露出・ホワイトバランス・コントラスト・HDR 風トーン・彩度・自然な彩度・色別補正(8 色・拾った色)・シャープネス・輝度/色ノイズ除去・レンズ補正・クロップ・傾き補正・ルック</dd></div>
       <div><dt>書き出し</dt><dd>JPEG / HEIF / 16bit TIFF / HDR HEIF<br>sRGB / Display P3 / Adobe RGB</dd></div>
       <div><dt>ルック</dt><dd>組み込み 4 種 + <code>.cube</code> 3D LUT<br><span class="dim">付属 LUT 21 個</span></dd></div>
       <div><dt>保存</dt><dd>非破壊(写真ごとのサイドカー JSON)<br>設定は <code>~/.Rawgenzo/</code></dd></div>
-      <div><dt>AI 操作</dt><dd>MCP サーバー <code>rawdev mcp</code>。Claude Code などの MCP クライアントから操作<br>調整・切り抜き・傾き補正・ルック・レンズ補正・HDR 出力・初期値に戻す・取り消し<br><span class="dim">試作。アプリで開いている写真への反映は、設定でオン</span></dd></div>
+      <div><dt>AI 操作</dt><dd>MCP サーバー <code>rawdev mcp</code>。Claude Code などの MCP クライアントから操作<br>調整・色別補正・切り抜き・傾き補正・ルック・レンズ補正・HDR 出力・初期値に戻す・取り消し<br><span class="dim">試作。アプリで開いている写真への反映は、設定でオン</span></dd></div>
       <div><dt>ライセンス</dt><dd>MIT License(オープンソース)</dd></div>
     </dl>
   </section>
