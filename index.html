@@ -337,6 +337,22 @@
         </div>
       </article>
 
+      <!-- 編集前と見比べる -->
+      <article class="card card-color card-compare card-wide fade-up">
+        <div class="card-body">
+          <p class="card-kicker">編集前と見比べる</p>
+          <h3>押している間だけ、<br>撮ったままに。</h3>
+          <p>「/」キーを押している間、プレビューが編集前に戻ります。切り抜きも傾きも外した、撮ったままの姿。離せば編集後に戻ります。「すべて初期値に戻す」と違って編集は消えないので、どれだけ変えたかを何度でも確かめられます。</p>
+          <ul class="pill-list">
+            <li>「/」を押している間</li><li>切り抜き・傾きも外す</li><li>編集は消えない</li>
+          </ul>
+        </div>
+        <div class="color-pair">
+          <figure><img src="assets/img/compare-before.jpg" alt="編集前の図書館のドーム。天窓の周りが明るく、全体に色が淡い" loading="lazy"><figcaption>「/」を押している間</figcaption></figure>
+          <figure><img src="assets/img/compare-after.jpg" alt="編集後の図書館のドーム。少し切り抜かれ、天窓の明るい所が戻り、木の色と青が締まっている" loading="lazy"><figcaption>離すと編集後</figcaption></figure>
+        </div>
+      </article>
+
       <!-- ヒストグラムと撮影情報 -->
       <article class="card card-info fade-up">
         <div class="card-body">
@@ -479,7 +495,7 @@ DSC03451.ARW → 20260622_ILCE-7SM3_003</span>
       <div><dt>動作環境</dt><dd>Apple Silicon 搭載の Mac<br>macOS 13 以降</dd></div>
       <div><dt>ビルド</dt><dd>Xcode 27 以降 (Swift 6.4)<br><span class="dim">外部の依存パッケージなし</span></dd></div>
       <div><dt>調整</dt><dd>露出・ホワイトバランス・コントラスト・トーンカーブ(輝度・R・G・B)・HDR 風トーン・彩度・自然な彩度・色別補正(8 色・拾った色)・シャープネス・輝度/色ノイズ除去・レンズ補正・クロップ・傾き補正・ルック</dd></div>
-      <div><dt>表示</dt><dd>ヒストグラム(R・G・B・明るさ)・撮影情報(EXIF)・撮影時のフォーカス位置<br>構図ガイド・等倍表示(物理ピクセル)</dd></div>
+      <div><dt>表示</dt><dd>ヒストグラム(R・G・B・明るさ)・撮影情報(EXIF)・撮影時のフォーカス位置<br>構図ガイド・等倍表示(物理ピクセル)・編集前との見比べ</dd></div>
       <div><dt>書き出し</dt><dd>JPEG / HEIF / 16bit TIFF / HDR HEIF<br>sRGB / Display P3 / Adobe RGB</dd></div>
       <div><dt>ルック</dt><dd>組み込み 4 種 + <code>.cube</code> 3D LUT<br><span class="dim">付属 LUT 21 個</span></dd></div>
       <div><dt>保存</dt><dd>非破壊(写真ごとのサイドカー JSON)<br>設定は <code>~/.Rawgenzo/</code></dd></div>
