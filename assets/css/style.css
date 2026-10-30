@@ -550,6 +550,36 @@ code { font-family: var(--mono); font-size: 0.88em; background: rgba(255,255,255
 .color-pair { flex: 1.3 1 0; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: clamp(20px, 3vw, 32px); }
 .color-pair figure { margin: 0; min-width: 0; }
 .color-pair img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+/* ヒストグラムと撮影情報・フォーカス位置(1 列のタイル 2 枚) */
+/* 隣のタイル(正方形の写真)に高さが合うので、ヒストグラムは見出しのすぐ下に置き、余りは下に回す */
+.card-info { justify-content: flex-start; }
+.card-focus { justify-content: space-between; }
+.info-demo { margin: 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); }
+.hist { display: block; width: 100%; height: 150px; background: rgba(0,0,0,0.35); border: 1px solid var(--line); border-radius: 10px; }
+.hist path { stroke: none; mix-blend-mode: screen; }
+.hist .hist-r { fill: rgba(255, 70, 70, 0.55); }
+.hist .hist-g { fill: rgba(70, 230, 90, 0.55); }
+.hist .hist-b { fill: rgba(80, 120, 255, 0.6); }
+.hist .hist-l { fill: none; stroke: rgba(255,255,255,0.85); stroke-width: 1.2; vector-effect: non-scaling-stroke; mix-blend-mode: normal; }
+.info-rows { margin: 16px 0 0; display: grid; gap: 6px; font-size: 14px; }
+.info-rows > div { display: grid; grid-template-columns: 5.5em 1fr; gap: 10px; }
+.info-rows dt { color: var(--text-3); }
+.info-rows dd { margin: 0; color: var(--text); font-variant-numeric: tabular-nums; }
+.focus-demo { position: relative; margin: 0 clamp(28px, 4vw, 48px) clamp(28px, 4vw, 48px); }
+.focus-demo img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+/* AF の枠のような四隅のかぎ(アプリの印と同じ緑) */
+.focus-mark {
+  position: absolute; width: 44px; height: 44px; transform: translate(-50%, -50%);
+  --c: #66ff66;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 12px 2.5px, linear-gradient(var(--c), var(--c)) top left / 2.5px 12px,
+    linear-gradient(var(--c), var(--c)) top right / 12px 2.5px, linear-gradient(var(--c), var(--c)) top right / 2.5px 12px,
+    linear-gradient(var(--c), var(--c)) bottom left / 12px 2.5px, linear-gradient(var(--c), var(--c)) bottom left / 2.5px 12px,
+    linear-gradient(var(--c), var(--c)) bottom right / 12px 2.5px, linear-gradient(var(--c), var(--c)) bottom right / 2.5px 12px;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 1.5px rgba(0,0,0,0.8));
+}
+.focus-mark::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--c); }
 .color-pair figcaption { margin-top: 8px; font-size: 13px; color: var(--text-2); text-align: center; }
 .template-demo {
   margin: clamp(20px, 3vw, 32px); padding: 28px; min-width: 340px;
