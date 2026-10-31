@@ -173,21 +173,16 @@
       <div class="ai-steps">
         <p class="ai-steps-title">使いはじめる</p>
         <ol>
-          <li>MCP クライアント(Claude Code など)に <code>rawdev mcp</code> を登録する</li>
+          <li>Rawgenzo を一度起動する。AI 用の登録(<code>~/.Rawgenzo/.mcp.json</code>)が作られます</li>
           <li>Rawgenzo の設定で「AI からの操作を受け付ける」をオンにする(画面にその場で出したいとき)</li>
-          <li>AI に話しかける。アプリで開いている写真は「この写真」で伝わります</li>
+          <li><code>~/.Rawgenzo</code> で Claude Code を開き、話しかける。アプリで開いている写真は「この写真」で伝わります</li>
         </ol>
         <p class="ai-links"><a href="https://github.com/Rawgenzo/Rawgenzo#ai-に現像を任せるmcp-サーバー試作">設定のしかた(README)</a><span aria-hidden="true">·</span><a href="https://github.com/Rawgenzo/Rawgenzo/blob/main/docs/ai-mcp-architecture.md">仕組みの図解</a></p>
       </div>
-<pre class="ai-config" aria-label="Claude Code の .mcp.json の例"><span class="c-dim">.mcp.json</span>
-{
-  <span class="c-key">"mcpServers"</span>: {
-    <span class="c-key">"rawgenzo"</span>: {
-      <span class="c-key">"command"</span>: <span class="c-str">"/path/to/rawdev"</span>,
-      <span class="c-key">"args"</span>: [<span class="c-str">"mcp"</span>, <span class="c-str">"/path/to/photos"</span>]
-    }
-  }
-}</pre>
+<pre class="ai-config" aria-label="~/.Rawgenzo で Claude Code を開くコマンド"><span class="c-dim"># アプリが作った登録(.mcp.json)を</span>
+<span class="c-dim"># Claude Code が読み、Rawgenzo とつながる</span>
+cd ~/.Rawgenzo
+claude</pre>
     </div>
     <p class="note center">試作の機能です。書き出しと、アプリで写真を開くことは、まだ AI からはできません。</p>
   </section>
@@ -509,7 +504,7 @@ DSC03451.ARW → 20260622_ILCE-7SM3_003</span>
     <div class="section-head fade-up">
       <p class="eyebrow">はじめる</p>
       <h2 class="headline">ソースから、<br class="sp">3 行で。</h2>
-      <p class="lead">ビルド済みのアプリは配布していません。Xcode の入った Mac で、次のコマンドを実行してください。<code>Rawgenzo.app</code> がビルドされ、<code>/Applications</code> に入ります。</p>
+      <p class="lead">ビルド済みのアプリは配布していません。Xcode の入った Mac で、次のコマンドを実行してください。<code>Rawgenzo.app</code> がビルドされ、<code>/Applications</code> に入ります。コマンドラインツールと AI 用の <code>rawdev</code> もアプリの中に入るので、終わったらクローンしたフォルダは消してかまいません。</p>
     </div>
     <div class="install fade-up">
       <pre id="installCode"><code>git clone https://github.com/Rawgenzo/Rawgenzo.git
